@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('films', function (Blueprint $table) {
-            $table->foreign('language_id')->references('id')->on('languages');
+        Schema::create('actor_film', function (Blueprint $table) {
+            $table->unsignedBigInteger('actor_id');
+            $table->unsignedBigInteger('film_id');
+            $table->primary(['actor_id', 'film_id']);
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('films', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('actor_film');
     }
 };
