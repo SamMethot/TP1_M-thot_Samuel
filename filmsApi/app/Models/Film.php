@@ -12,20 +12,29 @@ class Film extends Model
 
     protected $fillable = [
         'title',
-        'description',
         'release_year',
-        'language_id',
-        'original_language_id',
-        'rental_duration',
-        'rental_rate',
         'length',
-        'replacement_cost',
+        'description',
         'rating',
-        'special_features'
+        'language_id',
+        'special_features',
+        'image',
+        'created_at'
     ];
 
     public function language()
     {
-        return $this->belongsTo(Language::class, 'language_id');
+        return $this->belongsTo('App\Models\Language');
     }
+
+    public function critics()
+    {
+        return $this->hasMany('App\Models\Critic');
+    }
+
+    public function actors()
+    {
+        return $this->hasMany('App\Models\Actor');
+    }
+
 }

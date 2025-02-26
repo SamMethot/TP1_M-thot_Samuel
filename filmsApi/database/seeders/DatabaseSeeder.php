@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Critic;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,10 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
         $this->call([
             LanguageSeeder::class,
             FilmSeeder::class,
+            ActorSeeder::class,
+            ActorFilmSeeder::class
         ]);
+
+        $users = User::factory(10)->create();
+
+        foreach ($users as $user) {
+            Critic::factory(30)->create(['user_id' => $user->id]);
+        }
     }
 }

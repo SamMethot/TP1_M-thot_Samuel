@@ -3,12 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Language extends Model
+class Actor extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'birthdate'
+    ];
 
-    protected $fillable = ['name'];
 
     public function films()
     {
