@@ -4,32 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Film;
+use App\Models\Critic;
 use App\Http\Resources\FilmResource;
-use App\Http\Resources\ActorResource;
 use App\Http\Resources\CriticResource;
-use App\Http\Requests\FilmRequest;
 use Exception;
 use Illuminate\Database\QueryException;
 
-class FilmController extends Controller
+class CriticFilmController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        try
-        {
-            return (FilmResource::collection(Film::all()))->response()->setStatusCode(OK);
-        }
-        catch (QueryException $e)
-        {
-            abort(NOT_FOUND, NOT_FOUND_MESSAGE);
-        }  
-        catch (Exception $e)
-        {
-            abort(SERVER_ERROR, SERVER_ERROR_MESSAGE);
-        }
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
     }
 
     /**
@@ -37,26 +33,21 @@ class FilmController extends Controller
      */
     public function show(string $id)
     {
-        
-    }
-
-    public function store(FilmRequest $request)
-    {
         try
         {
-            $film = Film::create($request->validated());
-            return (new FilmResource($film))->response()->setStatusCode(CREATED);
+            $film = Film::find($id);
+            $critics = $film->critics;
+            return response()->json(['film' => new FilmResource($film), 'critics' => CriticResource::collection($critics)], 200);
         }
         catch (QueryException $e)
         {
             abort(NOT_FOUND, NOT_FOUND_MESSAGE);
-        }  
+        } 
         catch (Exception $e)
         {
             abort(SERVER_ERROR, SERVER_ERROR_MESSAGE);
-        }
+        } 
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -65,15 +56,24 @@ class FilmController extends Controller
     {
         //
     }
-   
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
+        //
+    }
+
+    public function averageScore(string $id)
+    {
         try
         {
-            return response()->noContent();
+            $film = Film::findOrFail($id);
+
+            $averageScore = $film->critics()->avg('score');
+
+            return response()->json(['averageScore' => $averageScore], OK);
         }
         catch (QueryException $e)
         {
@@ -84,4 +84,5 @@ class FilmController extends Controller
             abort(SERVER_ERROR, SERVER_ERROR_MESSAGE);
         }
     }
+
 }
