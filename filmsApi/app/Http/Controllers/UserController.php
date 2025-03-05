@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserRequest;
@@ -16,18 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        try
-        {
-            return (UserResource::collection(User::all()))->response()->setStatusCode(OK);
-        }
-        catch (QueryException $e)
-        {
-            abort(NOT_FOUND, NOT_FOUND_MESSAGE);
-        }
-        catch (Exception $e)
-        {
-            abort(SERVER_ERROR, SERVER_ERROR_MESSAGE);
-        }  
+        //
     }
 
     /**

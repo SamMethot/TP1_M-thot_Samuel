@@ -80,7 +80,7 @@ class UserCriticLanguageController extends Controller
 
             $preferredLanguage = Language::find($mostUsedLanguageId)->name;
 
-            return response()->json(['preferred_language' => $preferredLanguage], 200);
+            return response()->json(['preferred_language' => $preferredLanguage], OK);
         }
         catch (QueryException $e)
         {
@@ -88,7 +88,6 @@ class UserCriticLanguageController extends Controller
         }
         catch (Exception $e)
         {
-            Log::error('Erreur lors du calcul du langage préféré: ' . $e->getMessage());
             abort(SERVER_ERROR, SERVER_ERROR_MESSAGE);
         }
     }

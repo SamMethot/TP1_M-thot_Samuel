@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Film;
 use App\Http\Resources\FilmResource;
-use App\Http\Resources\ActorResource;
-use App\Http\Resources\CriticResource;
 use App\Http\Requests\FilmRequest;
 use Exception;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Log;
 
 class FilmController extends Controller
 {
@@ -43,19 +40,7 @@ class FilmController extends Controller
 
     public function store(FilmRequest $request)
     {
-        try
-        {
-            $film = Film::create($request->validated());
-            return (new FilmResource($film))->response()->setStatusCode(CREATED);
-        }
-        catch (QueryException $e)
-        {
-            abort(NOT_FOUND, NOT_FOUND_MESSAGE);
-        }  
-        catch (Exception $e)
-        {
-            abort(SERVER_ERROR, SERVER_ERROR_MESSAGE);
-        }
+        //
     }
 
 
@@ -72,18 +57,7 @@ class FilmController extends Controller
      */
     public function destroy(string $id)
     {
-        try
-        {
-            return response()->noContent();
-        }
-        catch (QueryException $e)
-        {
-            abort(NOT_FOUND, NOT_FOUND_MESSAGE);
-        }  
-        catch (Exception $e)
-        {
-            abort(SERVER_ERROR, SERVER_ERROR_MESSAGE);
-        }
+        //
     }
 
     public function search(Request $request)
@@ -114,7 +88,7 @@ class FilmController extends Controller
                 $query->where('length', '<=', $maxLength);
             }
 
-            $films = $query->paginate(20);
+            $films = $query->paginate(NB_ELEMENTS);
 
             return response()->json($films);
         }
