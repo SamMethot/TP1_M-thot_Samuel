@@ -10,8 +10,7 @@ Route::post('/users', 'App\Http\Controllers\UserController@store');
 Route::put('/users/{id}', 'App\Http\Controllers\UserController@update');
 Route::delete('/critics/{id}', 'App\Http\Controllers\CriticController@destroy');
 Route::get('/films/{id}/averageScore', 'App\Http\Controllers\CriticFilmController@averageScore');
-Route::get('/users/{id}/preferredLanguage', 'App\Http\Controllers\UserCriticController@preferredLanguage');
-//Route::get('/users', 'App\Http\Controllers\UserController@index');
+Route::get('/users/{id}/preferredLanguage', 'App\Http\Controllers\UserCriticLanguageController@preferredLanguage');
 
 
 

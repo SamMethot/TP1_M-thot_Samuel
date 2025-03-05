@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
 
 
-class UserCriticController extends Controller
+class UserCriticLanguageController extends Controller
 {
     /**
      * Display a listing of the resource.
