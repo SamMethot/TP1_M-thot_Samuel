@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Language;
 use App\Http\Resources\LanguageResource;
+use Exception;
 
 class LanguageController extends Controller
 {

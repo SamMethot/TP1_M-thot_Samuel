@@ -10,6 +10,7 @@ use App\Http\Resources\CriticResource;
 use App\Http\Requests\FilmRequest;
 use Exception;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class FilmController extends Controller
 {
@@ -84,4 +85,47 @@ class FilmController extends Controller
             abort(SERVER_ERROR, SERVER_ERROR_MESSAGE);
         }
     }
+
+    public function search(Request $request)
+    {
+        try
+        {
+            $keyword = $request->query('keyword');
+
+            $rating = $request->query('rating');
+            $minLength = $request->query('minLength');
+            $maxLength = $request->query('maxLength');
+            
+            $query = Film::query();
+            
+            if (!empty($keyword)) {
+                $query->where('title', 'LIKE', "%$keyword%");
+            }
+            
+            if (!empty($rating)) {
+                $query->where('rating', '=', $rating);
+            }
+            
+            if (!empty($minLength)) {
+                $query->where('length', '>=', $minLength);
+            }
+
+            if (!empty($maxLength)) {
+                $query->where('length', '<=', $maxLength);
+            }
+
+            $films = $query->paginate(20);
+
+            return response()->json($films);
+        }
+        catch (QueryException $e)
+        {
+            abort(NOT_FOUND, NOT_FOUND_MESSAGE);
+        }  
+        catch (Exception $e)
+        {
+            abort(SERVER_ERROR, SERVER_ERROR_MESSAGE);
+        }
+    }
+
 }

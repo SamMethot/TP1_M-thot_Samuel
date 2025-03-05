@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/films', 'App\Http\Controllers\FilmController@index');
@@ -11,14 +10,4 @@ Route::put('/users/{id}', 'App\Http\Controllers\UserController@update');
 Route::delete('/critics/{id}', 'App\Http\Controllers\CriticController@destroy');
 Route::get('/films/{id}/averageScore', 'App\Http\Controllers\CriticFilmController@averageScore');
 Route::get('/users/{id}/preferredLanguage', 'App\Http\Controllers\UserCriticLanguageController@preferredLanguage');
-
-
-
-Route::get('/languages', 'App\Http\Controllers\LanguageController@index');
-Route::get('/languages/{id}', 'App\Http\Controllers\LanguageController@show');
-Route::get('/languages/{id}/films', 'App\Http\Controllers\LanguageFilmController@index');
-
-Route::post('/films', 'App\Http\Controllers\FilmController@store');
-Route::delete('/films/{id}', 'App\Http\Controllers\FilmController@destroy');
-
-Route::get('/avg/{id}', 'App\Http\Controllers\LanguageFilmController@avg');
+Route::get('/films/search', 'App\Http\Controllers\FilmController@search');
