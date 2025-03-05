@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Critic;
+use App\Models\Language;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
@@ -58,28 +59,26 @@ class UserCriticController extends Controller
         {
 
             $user = User::find($id);
-
             $critics = $user->critics;
-
-
-
-            foreach ($critics as $critic) {
-                Log::info('Critiques de l\'utilisateur: ' . $critic);
-            }
-
-
-
-
-
-
+            $films = [];
             $languageCount = [];
+            foreach ($critics as $critic) {
+                $film = $critic->film;
+                $films[] = $film;
+                $languageId = $film->language->id;
 
-            if (empty($languageCount)) {
-                return response()->json(['error' => 'Aucune langue trouvée dans les critiques'], 404);
+                if (array_key_exists($languageId, $languageCount)) { // Documentation du array_key_exists : https://www.php.net/manual/en/function.array-key-exists.php
+                    $languageCount[$languageId]++;
+                } else {
+                    $languageCount[$languageId] = 1;
+                }
             }
 
             arsort($languageCount);
-            $preferredLanguage = array_key_first($languageCount);
+
+            $mostUsedLanguageId = array_key_first($languageCount);
+
+            $preferredLanguage = Language::find($mostUsedLanguageId)->name;
 
             return response()->json(['preferred_language' => $preferredLanguage], 200);
         }
