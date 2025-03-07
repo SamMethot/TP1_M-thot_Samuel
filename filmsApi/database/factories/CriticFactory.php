@@ -23,10 +23,8 @@ class CriticFactory extends Factory
 
         $faker = Faker::create();
         return [
-            'comment' =>$faker->text(10),
-            'score' => $faker->numberBetween(1, 10),
-            'created_at' => $faker->dateTimeThisYear(),
-            'updated_at' => $faker->dateTimeThisYear(),
+            'comment' =>$this->faker->text(10),
+            'score' => $this->faker->numberBetween(1, 10),
             'film_id' => $this->faker->randomElement($filmIds), // Documentation du randomElement : https://fakerphp.org/formatters/numbers-and-strings/#randomelement
             'user_id' => $this->faker->randomElement($userIds),
         ];

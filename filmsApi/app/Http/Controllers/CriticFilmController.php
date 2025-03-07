@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Film;
-use App\Models\Critic;
 use App\Http\Resources\FilmResource;
 use App\Http\Resources\CriticResource;
 use Exception;
@@ -37,7 +36,7 @@ class CriticFilmController extends Controller
         {
             $film = Film::find($id);
             $critics = $film->critics;
-            return response()->json(['film' => new FilmResource($film), 'critics' => CriticResource::collection($critics)], 200);
+            return response()->json(['film' => new FilmResource($film), 'critics' => CriticResource::collection($critics)], OK);
         }
         catch (QueryException $e)
         {
