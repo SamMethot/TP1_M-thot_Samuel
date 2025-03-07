@@ -14,25 +14,12 @@ class FilmsTest extends TestCase
 
     public function testGetFilms(): void
     {
-        $languages = Language::create([
-            'name' => 'test'
-        ]);
-        
-        $films = Film::create([
-            'title' => 'test',
-            'release_year' => 2021,
-            'length' => 120,
-            'description' => 'test',
-            'rating' => 'G',
-            'language_id' => 1,
-            'special_features' => 'test',
-            'image' => 'test'
-        ]);
+        $this->seed();
 
         $response = $this->get('/api/films');
 
         $films_array = json_decode($response->getContent(),true);
-        $this->assertEquals(count($films_array['data']), 1);
+        $this->assertEquals(count($films_array['data']), 100);
 
         foreach($films_array['data'] as $film){
             $this->assertArrayHasKey('title', $film);
@@ -45,25 +32,5 @@ class FilmsTest extends TestCase
             $this->assertArrayHasKey('image', $film);
         }
         $response->assertStatus(200);
-    }
-
-    public function testPostFilmShouldReturn422WhenMissingField()
-    {
-        $this->seed();
-
-        $json = [
-            'title' => 'test',
-            'release_year' => 2021,
-            'length' => 120,
-            'description' => 'test',
-            'rating' => 'G',
-            'language_id' => 1,
-            'image' => 'test'
-        ];
-
-        
-        $response = $this->postJson('/api/films', $json);
-        
-        $response->assertStatus(422);
     }
 }

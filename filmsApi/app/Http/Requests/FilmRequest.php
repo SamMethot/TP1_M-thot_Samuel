@@ -22,17 +22,15 @@ class FilmRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string',
+            'title' => 'required|string|max:50',
+            'release_year' => 'required|string|max:4',
+            'length' => 'required|integer|max:3',
+            'description' => 'required|integer',
+            'rating' => 'required|string|max:5',
             'language_id' => 'required|integer',
-            'description' => 'nullable|string',
-            'release_year' => 'nullable|integer',
-            'originale_language_id' => 'nullable|integer',
-            'rental_duration' => 'nullable|integer',
-            'rental_rate' => 'nullable|numeric',
-            'length' => 'nullable|integer',
-            'replacement_cost' => 'nullable|numeric',
-            'rating' => 'nullable|string',
-            'special_features' => 'nullable|string',
+            'special_features' => 'required|string|max:200',
+            'image' => 'required|string|max:40',
+            'created_at' => 'required|date'
         ];
     }
 }

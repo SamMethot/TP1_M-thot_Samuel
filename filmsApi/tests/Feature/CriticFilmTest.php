@@ -5,6 +5,8 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\Film;
+
 
 class CriticFilmTest extends TestCase
 {
@@ -13,9 +15,10 @@ class CriticFilmTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function testGetInfoFromFilmWithCriticsShouldReturn404WhenNull(): void
+    public function testGetInfoFromFilmWithCritics(): void
     {
+        $this->seed();
         $response = $this->get('/api/films/1/critics');
-        $response->assertStatus(404);
+        $response->assertStatus(200);
     }
 }

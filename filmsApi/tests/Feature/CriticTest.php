@@ -19,38 +19,8 @@ class CriticTest extends TestCase
      */
     public function testDeleteCritic(): void
     {
-        $user = User::create([
-            'last_name' => 'test',
-            'first_name' => 'test',
-            'login' => 'test',
-            'email' => 'test@test.com',
-            'password' => 'pass'
-        ]);
-
-        $language = Language::create([
-            'name' => 'test'
-        ]);
-
-        $film = Film::create([
-            'title' => 'test',
-            'release_year' => 2021,
-            'length' => 120,
-            'description' => 'test',
-            'rating' => 'G',
-            'language_id' => 1,
-            'special_features' => 'test',
-            'image' => 'test'
-        ]);
-
-        $critic = Critic::create([
-            'user_id' => $user->id,
-            'film_id' => $film->id,
-            'user_id' => $user->id,
-            'film_id' => 1,
-            'score' => 5,
-            'comment' => 'test comment'
-        ]);
-
+        $this->seed();
+        $critic = Critic::factory()->create();
         $response = $this->delete('/api/critics/' . $critic->id);        
         $response->assertStatus(204);
     }
