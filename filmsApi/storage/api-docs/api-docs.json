@@ -27,12 +27,323 @@
                     }
                 }
             }
+        },
+        "/api/critics/{id}": {
+            "delete": {
+                "tags": [
+                    "Critics"
+                ],
+                "summary": "Deletes a critic by ID",
+                "operationId": "4c7bbd907e57760bbbfc560c1ba8e1ba",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the critic to be deleted",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content - The critic was successfully deleted"
+                    },
+                    "404": {
+                        "description": "Not Found - Critic with the specified ID does not exist"
+                    },
+                    "500": {
+                        "description": "Internal Server Error - An unexpected error occurred"
+                    }
+                }
+            }
+        },
+        "/api/films/{id}/critics": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Retrieve a specific film along with its associated critics",
+                "description": "Fetch a specific film by its ID along with the critics associated with it.",
+                "operationId": "07cb9880167a4b0baa4506058e4d54fc",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the film to retrieve",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK."
+                    },
+                    "404": {
+                        "description": "Not Found."
+                    },
+                    "500": {
+                        "description": "Internal Server Error."
+                    }
+                }
+            }
+        },
+        "/api/films/{id}/averageScore": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Gets the average score of a film based on its critics",
+                "description": "Retrieve the average score for a specific film based on the ratings from its critics.",
+                "operationId": "9c5114c42b8c087e1e9f140af8859743",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the film for which the average score is calculated",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - Successfully retrieved the average score of the film",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "averageScore": {
+                                            "description": "The average score of the film",
+                                            "type": "number",
+                                            "format": "float"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found - Film with the specified ID does not exist"
+                    },
+                    "500": {
+                        "description": "Internal Server Error - An unexpected error occurred"
+                    }
+                }
+            }
+        },
+        "/api/films": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Retrieve a list of all films",
+                "description": "Fetches a list of all films available in the database.",
+                "operationId": "271e474415d2f29bf3c163247c5f4639",
+                "responses": {
+                    "200": {
+                        "description": "OK. A list of films is successfully retrieved."
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                }
+            }
+        },
+        "/api/films/search": {
+            "get": {
+                "tags": [
+                    "Films"
+                ],
+                "summary": "Search films based on various filters",
+                "description": "Retrieve a list of films based on a set of search filters, including title, rating, and length range.",
+                "operationId": "ddbc3843cfe184eb1429a6ad3d501fbb",
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "Keyword to search in film title",
+                        "required": false
+                    },
+                    {
+                        "name": "rating",
+                        "in": "query",
+                        "description": "Film rating filter",
+                        "required": false
+                    },
+                    {
+                        "name": "minLength",
+                        "in": "query",
+                        "description": "Minimum film length",
+                        "required": false
+                    },
+                    {
+                        "name": "maxLength",
+                        "in": "query",
+                        "description": "Maximum film length",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - Successfully retrieved films"
+                    },
+                    "404": {
+                        "description": "Not Found - No films found matching the search criteria"
+                    },
+                    "500": {
+                        "description": "Internal Server Error - An unexpected error occurred"
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Creates a new user",
+                "operationId": "592819a0265360b2014512d6dbfaf0e7",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "login": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "404": {
+                        "description": "Not Found - The requested resource was not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error - An unexpected error occurred"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Updates an existing user",
+                "operationId": "b9091397c8b25f12c6adb74be6ce3a5a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the user to be updated",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "login": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK - The user was updated successfully"
+                    },
+                    "404": {
+                        "description": "Not Found - User with the specified ID does not exist"
+                    },
+                    "500": {
+                        "description": "Internal Server Error - An unexpected error occurred"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}/preferredLanguage": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Gets the preferred language of a user based on the films they reviewed",
+                "description": "Retrieve the most frequently used language for films reviewed by a specific user.",
+                "operationId": "96b9894827b55a8a33dee5a295c148c5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the user for which you want to retrieve the preferred language",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK - Successfully retrieved the user's preferred language"
+                    },
+                    "404": {
+                        "description": "Not Found - User with the specified ID does not exist or has no reviews"
+                    },
+                    "500": {
+                        "description": "Internal Server Error - An unexpected error occurred"
+                    }
+                }
+            }
         }
     },
     "tags": [
         {
             "name": "Actors",
             "description": "Actors"
+        },
+        {
+            "name": "Critics",
+            "description": "Critics"
+        },
+        {
+            "name": "Films",
+            "description": "Films"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
         }
     ]
 }

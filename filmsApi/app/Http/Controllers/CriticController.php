@@ -12,40 +12,30 @@ use Exception;
 class CriticController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    * @OA\Delete(
+    *     path="/api/critics/{id}",
+    *     tags={"Critics"},
+    *     summary="Deletes a critic by ID",
+    *     @OA\Parameter(
+    *         name="id",
+    *         in="path",
+    *         description="The ID of the critic to be deleted",
+    *         required=true
+    *     ),
+    *     @OA\Response(
+    *         response=204,
+    *         description="No Content - The critic was successfully deleted"
+    *     ),
+    *     @OA\Response(
+    *         response=404,
+    *         description="Not Found - Critic with the specified ID does not exist"
+    *     ),
+    *     @OA\Response(
+    *         response=500,
+    *         description="Internal Server Error - An unexpected error occurred"
+    *     )
+    * )
+    */
     public function destroy(string $id)
     {
         try
