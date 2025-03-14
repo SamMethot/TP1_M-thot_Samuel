@@ -13,9 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
         $users = User::factory(10)->create();
-
+        
         $this->call([
             LanguageSeeder::class,
             FilmSeeder::class,
@@ -24,6 +23,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         foreach ($users as $user) {
+            echo "rentrer dans le foreach";
             Critic::factory(30)->create(['user_id' => $user->id]);
         }
     }

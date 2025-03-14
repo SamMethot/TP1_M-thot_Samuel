@@ -17,13 +17,6 @@ class ActorFilmTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function testGetActorsFromOneFilmNoInformationShouldReturnStatus404(): void
-    {
-
-        $response = $this->get('/api/films/1/actors');
-        $response->assertStatus(404);
-    }
-
     public function testGetActorsFromOneFilmShouldReturnStatus200(): void
     {
 

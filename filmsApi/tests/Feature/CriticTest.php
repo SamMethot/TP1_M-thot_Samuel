@@ -24,4 +24,11 @@ class CriticTest extends TestCase
         $response = $this->delete('/api/critics/' . $critic->id);        
         $response->assertStatus(204);
     }
+
+    public function testDeleteCriticShouldReturn500IfCriticDoesNotExist(): void
+    {
+        $this->seed();
+        $response = $this->delete('/api/critics/199999999999999999');
+        $response->assertStatus(500);
+    }
 }

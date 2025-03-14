@@ -11,6 +11,7 @@ const SERVER_ERROR_MESSAGE = 'Server error';
 const NB_ELEMENTS = 20;
 const NO_CONTENT = 204;
 
+/** * @OA\Info(title="Films API", version="0.1") */ 
 
 abstract class Controller
 {

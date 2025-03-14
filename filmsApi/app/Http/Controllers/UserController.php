@@ -61,7 +61,7 @@ class UserController extends Controller
         catch (QueryException $e)
         {
             abort(NOT_FOUND, NOT_FOUND_MESSAGE);
-        }  
+        }
         catch (Exception $e)
         {
             abort(SERVER_ERROR, SERVER_ERROR_MESSAGE);

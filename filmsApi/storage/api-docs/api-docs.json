@@ -1,0 +1,38 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Films API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/films/{id}/actors": {
+            "get": {
+                "tags": [
+                    "Actors"
+                ],
+                "summary": "Gets actors for a specific film by its ID",
+                "description": "Retrieve a list of actors associated with a specific film based on its ID.",
+                "operationId": "7d13a2b9f269b9c01b815236d8cc812b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the film for which you want to retrieve the actors",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Actors",
+            "description": "Actors"
+        }
+    ]
+}

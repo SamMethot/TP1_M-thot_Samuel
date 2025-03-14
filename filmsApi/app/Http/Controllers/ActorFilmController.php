@@ -29,8 +29,23 @@ class ActorFilmController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
+    * @OA\Get(
+    *     path="/api/films/{id}/actors",
+    *     tags={"Actors"},
+    *     summary="Gets actors for a specific film by its ID",
+    *     description="Retrieve a list of actors associated with a specific film based on its ID.",
+    *     @OA\Parameter(
+    *         name="id",
+    *         in="path",
+    *         description="The ID of the film for which you want to retrieve the actors",
+    *         required=true
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK"
+    *     )
+    * )
+    */
     public function show(string $id)
     { 
         try
