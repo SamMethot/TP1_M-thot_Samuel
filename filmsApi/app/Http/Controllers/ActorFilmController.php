@@ -13,24 +13,23 @@ use Illuminate\Database\QueryException;
 class ActorFilmController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        
-    }
-
-    /**
-     * Display the specified resource.
-     */
+    * @OA\Get(
+    *     path="/api/films/{id}/actors",
+    *     tags={"Actors"},
+    *     summary="Gets actors for a specific film by its ID",
+    *     description="Retrieve a list of actors associated with a specific film based on its ID.",
+    *     @OA\Parameter(
+    *         name="id",
+    *         in="path",
+    *         description="The ID of the film for which you want to retrieve the actors",
+    *         required=true
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK"
+    *     )
+    * )
+    */
     public function show(string $id)
     { 
         try
@@ -47,21 +46,5 @@ class ActorFilmController extends Controller
         {
             abort(SERVER_ERROR, SERVER_ERROR_MESSAGE);
         }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

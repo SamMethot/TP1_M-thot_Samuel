@@ -25,10 +25,8 @@ class CriticFactory extends Factory
         return [
             'comment' =>$faker->text(10),
             'score' => $faker->numberBetween(1, 10),
-            'created_at' => $faker->dateTimeThisYear(),
-            'updated_at' => $faker->dateTimeThisYear(),
-            'film_id' => $this->faker->randomElement($filmIds), // Documentation du randomElement : https://fakerphp.org/formatters/numbers-and-strings/#randomelement
-            'user_id' => $this->faker->randomElement($userIds),
+            'film_id' => $faker->randomElement($filmIds), // Documentation du randomElement : https://fakerphp.org/formatters/numbers-and-strings/#randomelement
+            'user_id' => $faker->randomElement($userIds),
         ];
     }
 }

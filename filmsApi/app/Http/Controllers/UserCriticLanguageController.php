@@ -13,46 +13,33 @@ use Illuminate\Database\QueryException;
 
 class UserCriticLanguageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
+    * @OA\Get(
+    *     path="/api/users/{id}/preferredLanguage",
+    *     tags={"Users"},
+    *     summary="Gets the preferred language of a user based on the films they reviewed",
+    *     description="Retrieve the most frequently used language for films reviewed by a specific user.",
+    *     @OA\Parameter(
+    *         name="id",
+    *         in="path",
+    *         description="The ID of the user for which you want to retrieve the preferred language",
+    *         required=true
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK - Successfully retrieved the user's preferred language"
+    *     ),
+    *     @OA\Response(
+    *         response=404,
+    *         description="Not Found - User with the specified ID does not exist or has no reviews"
+    *     ),
+    *     @OA\Response(
+    *         response=500,
+    *         description="Internal Server Error - An unexpected error occurred"
+    *     )
+    * )
+    */
     public function preferredLanguage(string $id)
     {
         try
